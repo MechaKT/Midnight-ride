@@ -46,6 +46,62 @@ You've seen it before, but only on TV.
 ------ Game Over ------
 """
 
+LOSE_HUNGER = """
+
+YOUR STOMACH IS EMPTY.
+WHO KNEW THAT WHAT THE DOCTOR SAID WAS TRUE,
+THAT HUMAN/ROBOT HYBRIDS WOULD NEED
+TOFU TO SUSTAIN THEMSELVES
+YOUR ROBOT SYSTEMS START TO SHUT DOWN
+YOUR HUMAN EYES CLOSE.
+THE LAST THING THAT YOU HEAR ARE SIRENS.
+THEY GOTCHU. THEY GOT THE CAR.
+WE FAILED...
+
+
+------ GAME OVER ------
+"""
+
+
+LOSE_AGENTS = """
+
+THE AGENTS HAVE CLOSED IN ON YOU.
+THERE ARE AT LEAST 20 CARS SURROUNDING YOU.
+THE LEAD CAR BUMPS YOUR PASSENGER SIDE.
+YOU MANAGE TO CORRECT YOUR STEERING TO KEEP YOU FROM CRASHING
+
+YOU DIDN'T SEE THE AGENT'S CAR BESIDE YOU
+THE DRIVER BUMPS YOUR CAR.
+AND THAT'S IT.
+
+YOU SPIN OUT OF CONTROL.
+THE CAR FLIPS OVER AT LEAST TWO TIMES.
+OR MORE... YOU LOST COUNT.
+
+SIRENS.
+
+"ARE THEY ALIVE?" SOMEONE ASKS.
+"DOESN'T MATTER. ALL WE WANTED WAS THE CAR."
+YOU SEE A DOG WALKING OUT OF THE CAR.
+"WAS IT IN THE CAR THE WHOLE TIME?" YOU
+THINK TO YOURSELF
+
+THE DOG LOOKS UP AT THE OFFICERS.
+"YOU WILL NEVER STOP THE REVOLUTION."
+"DID THE DOG JUST TALK?" YOU THINK TO YOURSELF.
+
+YOU DRIFT OFF TO UNCONSCIOUSNESS.
+
+------ GAME OVER ------
+"""
+
+LOSE_FUEL = """
+
+YOUR FUEL HAS RUN DRY. YOU ARE SURROUNDED ALL OVER...
+THEY DID GON GETCHU.
+
+------ GAME OVER ------
+"""
 CHOICES = """
     ----
     A. Chompers
@@ -111,7 +167,18 @@ def main():
         elif hunger > 45:
             # LOSER - TOO HUNGRY
             # Print losing scenario
+            time.sleep(2)
+            type_text_output(LOSE_HUNGER)
             break
+        elif agents_distance >= 0:
+            # LOSE - AGENTS REACHED YOU
+            # print losing scenario
+            time.sleep(2)
+            type_text_output(LOSE_AGENTS)
+        elif fuel <= 0:
+            # LOSE - RAN OUT OF FUEL
+            time.sleep(2)
+            type_text_output(LOSE_FUEL)
         # Give the player their choices
         print(CHOICES)
 
@@ -180,5 +247,6 @@ def main():
 
     # Outroduction
     print("Thanks for playing! Please play again. =)")
+    print(f"You finished the game in {turns} turns.")
 if __name__ == '__main__':
     main()
